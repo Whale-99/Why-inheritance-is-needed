@@ -5,51 +5,47 @@ class Animal:
         self.alive = True
         self.fed = False
 
+    # Общий метод для всех животных
+    def eat(self, food):
+        if isinstance(food, Plant):  # Проверяем, что еда является растением
+            if food.edible:
+                print(f"{self.name} съел {food.name}")
+                self.fed = True
+            else:
+                print(f"{self.name} не стал есть {food.name}")
+                self.alive = False  # Животное погибает от несъедобного растения
+
 # Родительский класс для растений
 class Plant:
     def __init__(self, name):
         self.name = name
         self.edible = False
 
-# Класс для млекопитающих
+# Класс для млекопитающих, наследуется от Animal
 class Mammal(Animal):
-    def eat(self, food):
-        if isinstance(food, Plant):
-            if food.edible:
-                print(f"{self.name} съел {food.name}")
-                self.fed = True
-            else:
-                print(f"{self.name} не стал есть {food.name}")
-                self.alive = False
+    pass
 
-# Класс для хищников
+# Класс для хищников, наследуется от Animal
 class Predator(Animal):
-    def eat(self, food):
-        if isinstance(food, Plant):
-            if food.edible:
-                print(f"{self.name} съел {food.name}")
-                self.fed = True
-            else:
-                print(f"{self.name} не стал есть {food.name}")
-                self.alive = False
+    pass
 
-# Класс для цветков
+# Класс для цветков, наследуется от Plant
 class Flower(Plant):
     pass
 
-# Класс для фруктов
+# Класс для фруктов, наследуется от Plant
 class Fruit(Plant):
     def __init__(self, name):
         super().__init__(name)
-        self.edible = True  # Переопределяем значение для съедобных фруктов
+        self.edible = True  # Фрукты съедобные
 
-# Пример работы
+# Пример работы программы
 a1 = Predator('Волк с Уолл-Стрит')
 a2 = Mammal('Хатико')
 p1 = Flower('Цветик семицветик')
 p2 = Fruit('Заводной апельсин')
 
-# Выводим имя животных и растений
+# Выводим имена животных и растений
 print(a1.name)  # Волк с Уолл-Стрит
 print(p1.name)  # Цветик семицветик
 
